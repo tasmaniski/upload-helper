@@ -3,7 +3,7 @@
   "description":       "Helper for upload different files.",
   "type":              "Composer package",
   "keywords":          ["upload helper"],
-  "homepage":          "https://github.com/tasmaniski/upload-helper",
+  "homepage":          "https://github.com/tasmaniski",
   "authors": [
     {
       "name":     "Aleksandar Varnicic",
