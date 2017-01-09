@@ -1,0 +1,28 @@
+{
+  "name":              "tasmaniski/upload-helper",
+  "description":       "Helper for upload different files.",
+  "type":              "Composer package",
+  "keywords":          ["upload helper"],
+  "homepage":          "https://github.com/tasmaniski/upload-helper",
+  "authors": [
+    {
+      "name":     "Aleksandar Varnicic",
+      "email":    "tasmaniski@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^5.6 || ^7.0",
+    "zendframework/zend-validator": "^2.8",
+    "zendframework/zend-inputfilter": "^2.7",
+    "zendframework/zend-inputfilter": "^2.7",
+    "zendframework/zend-file": "^2.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "UploadHelper": "src/"
+    },
+    "classmap": [
+      "src/"
+    ]
+  }
+}
