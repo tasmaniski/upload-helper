@@ -19,10 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "UploadHelper": "src/"
-    },
-    "classmap": [
-      "src/"
-    ]
+      "UploadHelper\\": "src/"
+    }
   }
 }
