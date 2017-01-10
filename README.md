@@ -2,7 +2,21 @@
 
 Manage - filter, validate and upload files.
 
-## Example
+# Install
+
+Add in you **composer.json** file:
+
+```json
+{
+    "require": {
+        "tasmaniski/upload-helper": "^1.0"
+    }
+}
+```
+Don't forget to run *composer update*.
+
+
+# Example
 
 ```php
 use Zend\Http\PhpEnvironment\Request;
