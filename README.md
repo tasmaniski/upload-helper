@@ -33,10 +33,9 @@ $name  = $upload->uploadFile($image, 'image_name');   // After this the file is 
 $path  = $upload->getWebPath($name);                  // If you need path for the Web or API
 
 var_dump($name, $path);
-```
+
 
 Will display:
-```
 32f45151a816ffe96d571964f64faa20.png                    // File name
 /uploads/3/2/f/32f45151a816ffe96d571964f64faa20.png     // Path to file
 ```
