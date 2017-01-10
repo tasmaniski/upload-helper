@@ -12,7 +12,7 @@ class Upload
     private $nonPublicPath;
 
     /**
-     * Upload constructor.
+     * Upload Helper constructor.
      *
      * @param $publicPath       Path to uload folder eg. /var/www/web-site/public/uploads/
      * @param $nonPublicPath    Path to uload folder eg. /var/www/web-site/data/uploads/
@@ -24,10 +24,12 @@ class Upload
     }
 
     /**
+     * Return file path from file name, if folder doesn't not exist create it.
+     *
      * @param string $file File name eg. "image.jpg"
-     * @param bool $public are we need to return path at public folder or non-public
-     * @return type
-     * @throws Exception
+     * @param bool $public If we need to return path at public folder or non-public
+     * @return string           Path to the file
+     * @throws \Exception
      */
     public function getPath($file, $public = true)
     {
@@ -42,7 +44,7 @@ class Upload
     }
 
     /**
-     * Return  web URL path - eg. http://web-site.com/public-upload-folder/image.jpg
+     * Return  web URL path - eg. /public-upload-folder/image.jpg
      *
      * @param String $file File name
      * @return string
@@ -64,16 +66,16 @@ class Upload
     }
 
     /**
-     * Simple upload file withouth validators
+     * Simple upload file withouth validation
      *
      * @param array $file     from $_FILE
+     * @param string $key     When we have multi upload form
      * @param string $name    If we send NULL then a file will be created with new name
      * @param boolean $public Should we perform upload in public folder or non-public
-     * @param string $key     if you have multi upload form, you must pass key
-     * @return string
-     * @throws Exception
+     * @return string         File name
+     * @throws \Exception
      */
-    public function uploadFile($file, $public = true, $name = null, $key = null)
+    public function uploadFile($file, $key, $name = null, $public = true)
     {
         $overwrite = isset($name);
         $name      = is_null($name) ? $this->getRandomFileName($file['name']) : $name;
@@ -90,25 +92,27 @@ class Upload
     }
 
     /**
-     * Delete file from FS
+     * Delete file from File System.
      *
      * @param $file string file name eg. "image.jpg"
+     * @throws \Exception
      */
     public function deleteFile($file)
     {
-        $imagePath = getcwd() . '/public' . $file;
-
-        if(file_exists($imagePath)){
-            unlink($imagePath);
-        }
+        throw new \Exception('todo: implement delete');
     }
 
     /**
-     * Use image filter and return filtered value
+     * Check if file is valid image.
+     *
+     * @param $data         Entire $_FILE array
+     * @param string $key   Key in array - eg. $_FILES['my-image']
+     * @return mixed        File object ready to be uploaded
+     * @throws \Exception   If file is not an image
      */
-    public function filterImage($data, $key = 'image')
+    public function filterImage($data, $key)
     {
-        $filter = (new ImageFilter)->getInputFilter();
+        $filter = (new ImageFilter)->getInputFilter($key);
 
         if(!$filter->setData($data)->isValid()){
             throw new \Exception(json_encode($filter->getMessages()));

@@ -13,37 +13,32 @@ use Zend\Validator\File\Exists;
 
 class ImageFilter implements InputFilterAwareInterface
 {
-    private $filter;
 
     public function setInputFilter(InputFilterInterface $filter)
     {
         throw new \Exception("Setting input filter not allowed");
     }
 
-    public function getInputFilter()
+    /**
+     *  Always return new instance
+     */
+    public function getInputFilter($key = null)
     {
-        if(empty($this->filter)){
-            $this->filter = new InputFilter;
-            $factory      = new Factory;
-            $exist        = new Exists;
-            $filesize     = new Size(['max' => '2MB']);
-            $extension    = new Extension(['extension' => ['png,jpg,jpeg']]);
-            $imgValid     = new IsImage;
+        $filter    = new InputFilter;
+        $factory   = new Factory;
+        $exist     = new Exists;
+        $imgValid  = new IsImage;
+        $extension = new Extension(['extension' => ['png,jpg,jpeg']]);
+        $filesize  = new Size(['max' => '2MB']);
 
-            $exist->setMessage('Slika je obavezna.');
-            $filesize->setMessage('Maksimalna veličina slike je 2MB.');
-            $imgValid->setMessage('Fajl mora biti validna slika.');
-            $extension->setMessage('Fajl nema validnu ekstenziju.');
+        $inputFilter = $factory->createInput([
+            'name'       => $key,
+            'required'   => true,
+            'validators' => [$exist, $imgValid, $extension, $filesize],
+        ]);
 
-            $inputFilter = $factory->createInput([
-                'name'       => 'image',
-                'required'   => true,
-                'validators' => [$exist, $imgValid, $extension, $filesize],
-            ]);
+        $filter->add($inputFilter);
 
-            $this->filter->add($inputFilter);
-        }
-
-        return $this->filter;
+        return $filter;
     }
 }
