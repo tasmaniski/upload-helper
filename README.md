@@ -29,8 +29,8 @@ $non_public_path    = '/var/www/website/data/uploads';
 $upload             = new Upload($public_path, $non_public_path);   // Build upload object
 
 $image = $upload->filterImage($files, 'image_name');  // image_name is the name from HTML form file input
-$name  = $upload->uploadFile($image, 'image_name');
-$path  = $upload->getWebPath($name);
+$name  = $upload->uploadFile($image, 'image_name');   // The file is uploaded :) 
+$path  = $upload->getWebPath($name);                  // If you need path for the Web or API
 
 var_dump($name, $path);
 ```
