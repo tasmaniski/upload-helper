@@ -31,6 +31,11 @@ class ImageFilter implements InputFilterAwareInterface
         $extension = new Extension(['extension' => ['png,jpg,jpeg']]);
         $filesize  = new Size(['max' => '2MB']);
 
+        $imgValid->setOptions([
+            'disableMagicFile' => true,
+            'magicFile'        => false,
+        ]);
+
         $inputFilter = $factory->createInput([
             'name'       => $key,
             'required'   => true,
