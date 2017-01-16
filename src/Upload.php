@@ -121,4 +121,20 @@ class Upload
         return $filter->getValue($key);
     }
 
+    /**
+     * Validate and upload img
+     */
+    public function uploadImage($data, $key)
+    {
+        if(!$data[$key]['name']){
+            return '';
+        }
+
+        $image = $this->filterImage($data, $key);
+        $name  = $this->uploadFile($image, $key);
+        $path  = $this->getWebPath($name);
+
+        return $path;
+    }
+
 }
