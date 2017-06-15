@@ -94,12 +94,19 @@ class Upload
     /**
      * Delete file from File System.
      *
-     * @param $file string file name eg. "image.jpg"
+     * @param $file string file name eg. "/path/to/image.jpg"
      * @throws \Exception
      */
-    public function deleteFile($file)
+    public function deleteFile($file = null)
     {
-        throw new \Exception('todo: implement delete');
+        if($file){
+            $name = basename($file);
+            $path = $this->upload->getPath($name);
+
+            if(file_exists($path)){
+                unlink($path);
+            }
+        }
     }
 
     /**
