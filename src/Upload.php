@@ -101,7 +101,7 @@ class Upload
     {
         if($file){
             $name = basename($file);
-            $path = $this->upload->getPath($name);
+            $path = $this->getPath($name);
 
             if(file_exists($path)){
                 unlink($path);
